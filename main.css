@@ -1,19 +1,20 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
 body {
   max-height: 100vh;
 }
 
+.whole {
+  padding: 5px;
+  background: #555555;
+  height: 100vh;
+}
 .contents {
+  background: #f1f1f1;
   max-height: 100vh;
   padding: 10px;
 }
 .joystick-container {
   margin: 0px;
-  height: 25vh;
+  height: 30vh;
 }
 .logo {
   height: 20vh;
@@ -22,12 +23,17 @@ body {
   position: absolute;
   right: 20px;
 }
-.slider-selection {
-  background: #ff5100 !important;
-}
 .custom-range::-webkit-slider-thumb {
   background: #ff5100;
 }
 .custom-range::-webkit-slider-track {
   background: #ff5100;
+}
+
+.single-container {
+  text-align: center;
+}
+
+.joystick-icon {
+  width: 30px;
 }

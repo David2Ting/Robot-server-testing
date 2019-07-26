@@ -2,14 +2,19 @@ var drive_cmd;
 var drive_node;
 var publishImmidiately = true;
 var robot_IP;
-var manager;
+var manager_X;
+var manager_Y;
 var teleop;
 var ros;
 var listener;
+
+var RPM;
+var turn;
 var turn_range = 1;
 var speed_range = 1;
-function moveAction(RPM, turn) {
-  if (RPM !== undefined && turn !== undefined) {
+function moveAction() {
+  if (true) {
+    //RPM !== undefined && turn !== undefined) {
     drive_cmd.rpm = Math.floor(RPM * 100);
     drive_cmd.steer_pct = turn * 20;
   } else {
@@ -61,49 +66,90 @@ function initSliders() {
   robotTurnRange = document.getElementById("robot-turn");
   robotTurnRange.oninput = function() {
     turn_range = robotTurnRange.value / 100;
+    document.getElementById("turn-label").innerHTML =
+      "" + robotTurnRange.value + "%";
     console.log(turn_range);
   };
 }
 
-function createJoystick() {
+function createJoystickX() {
   // Check if joystick was aready created
-  if (manager == null) {
-    joystickContainer = document.getElementById("joystick");
+  if (manager_X == null) {
+    joystickContainer = document.getElementById("joystick-X");
     // joystck configuration
     var options = {
       zone: joystickContainer,
-      position: { left: 50 + "%", top: 105 + "px" },
+      position: { left: 50 + "%", top: 140 + "px" },
       mode: "static",
       size: 150,
-      color: "#f05e23",
+      color: "#000000",
       restJoystick: true,
-      lockX: true
+      lockY: true
     };
-    manager = nipplejs.create(options);
+    manager_X = nipplejs.create(options);
     // event listener for joystick move
-    manager.on("move", function(evt, nipple) {
+    manager_X.on("move", function(evt, nipple) {
       // turn 90 degrees to be facing upwards
       var direction = 90 - nipple.angle.degree;
       if (direction < -180) {
         direction = 450 - nipple.angle.degree;
       }
       // convert angles to radians and scale to RPM and turn
-      var RPM =
-        Math.cos(direction / 57.29) * nipple.distance * 0.005 * speed_range;
-      var turn =
-        Math.sin(direction / 57.29) * nipple.distance * 0.05 * turn_range;
+      RPM = Math.cos(direction / 57.29) * nipple.distance * 0.005 * speed_range;
       // events triggered earlier than 50ms after last publication will be dropped
       if (publishImmidiately) {
         publishImmidiately = false;
-        moveAction(RPM, turn);
+        moveAction();
         setTimeout(function() {
           publishImmidiately = true;
         }, 50);
       }
     });
     // event listener for joystick release, always send stop message
-    manager.on("end", function() {
-      moveAction(0, 0);
+    manager_X.on("end", function() {
+      RPM = 0;
+      moveAction();
+    });
+  }
+}
+
+function createJoystickY() {
+  // Check if joystick was aready created
+  if (manager_Y == null) {
+    joystickContainer = document.getElementById("joystick-Y");
+    // joystck configuration
+    var options = {
+      zone: joystickContainer,
+      position: { left: 50 + "%", top: 140 + "px" },
+      mode: "static",
+      size: 150,
+      color: "#000000",
+      restJoystick: true,
+      lockX: true
+    };
+    manager_Y = nipplejs.create(options);
+    // event listener for joystick move
+    manager_Y.on("move", function(evt, nipple) {
+      // turn 90 degrees to be facing upwards
+      var direction = 90 - nipple.angle.degree;
+      if (direction < -180) {
+        direction = 450 - nipple.angle.degree;
+      }
+      // convert angles to radians and scale to RPM and turn
+      turn = Math.sin(direction / 57.29) * nipple.distance * 0.05 * turn_range;
+      // events triggered earlier than 50ms after last publication will be dropped
+      if (publishImmidiately) {
+        publishImmidiately = false;
+        moveAction();
+        setTimeout(function() {
+          publishImmidiately = true;
+        }, 50);
+      }
+    });
+    // event listener for joystick release, always send stop message
+    manager_Y.on("end", function() {
+      turn = 0;
+      moveAction();
     });
   }
 }
@@ -126,7 +172,8 @@ window.onload = function() {
     robot_IP +
     ":8080/stream?topic=/camera/rgb/image_raw&type=mjpeg&quality=80";
   */
-  createJoystick();
+  createJoystickY();
+  createJoystickX();
   initSliders();
   video.onload = function() {
     // joystick and keyboard controls will be available only when video is correctly loaded
