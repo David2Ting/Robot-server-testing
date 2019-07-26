@@ -53,6 +53,8 @@ function initSliders() {
   robotSpeedRange = document.getElementById("robot-speed");
   robotSpeedRange.oninput = function() {
     speed_range = robotSpeedRange.value / 100;
+    document.getElementById("speed-label").innerHTML =
+      "" + robotSpeedRange.value + " RPM";
     console.log(speed_range);
   };
   //Scaler between 0.15-1 for full turn
@@ -72,9 +74,10 @@ function createJoystick() {
       zone: joystickContainer,
       position: { left: 50 + "%", top: 105 + "px" },
       mode: "static",
-      size: 200,
-      color: "#0066ff",
-      restJoystick: true
+      size: 150,
+      color: "#f05e23",
+      restJoystick: true,
+      lockX: true
     };
     manager = nipplejs.create(options);
     // event listener for joystick move
@@ -106,7 +109,7 @@ function createJoystick() {
 }
 
 window.onload = function() {
-  // IP address off the ros-bridge-server
+  // IP address of the ros-bridge-server
   robot_IP = "192.168.0.6";
 
   // // Init handle for rosbridge_websocket
@@ -116,13 +119,13 @@ window.onload = function() {
 
   initVelocityPublisher();
   // get handle for video placeholder
-  video = document.getElementById("video");
+  //video = document.getElementById("video");
   // Populate video source
-  video.src =
+  /*video.src =
     "http://" +
     robot_IP +
     ":8080/stream?topic=/camera/rgb/image_raw&type=mjpeg&quality=80";
-
+  */
   createJoystick();
   initSliders();
   video.onload = function() {

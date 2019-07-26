@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-height: 100vh;
+}
+
+.contents {
+  max-height: 100vh;
+  padding: 10px;
+}
+.joystick-container {
+  margin: 0px;
+  height: 25vh;
+}
+.logo {
+  height: 20vh;
+}
+.update-label {
+  position: absolute;
+  right: 20px;
+}
+.slider-selection {
+  background: #ff5100 !important;
+}
+.custom-range::-webkit-slider-thumb {
+  background: #ff5100;
+}
+.custom-range::-webkit-slider-track {
+  background: #ff5100;
+}

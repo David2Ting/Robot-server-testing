@@ -16,70 +16,66 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
   </head>
   <body>
-    <!-- Optional JavaScript -->
-
-    <!-- Sliders -->
-    <div">
+    <div class="contents">
       <div>
-        <label for="robot-speed">
-          <strong>Drive Speed</strong>
-        </label>
-        <input
-          type="range"
-          min="15"
-          max="100"
-          class="custom-range"
-          id="robot-speed"
-        />
-      </div>
-      <div>
-        <label for="robot-turn">
-          <strong>Turn Rate</strong>
-        </label>
-        <input
-          type="range"
-          min="15"
-          max="100"
-          class="custom-range"
-          id="robot-turn"
-        />
-      </div>
-    </div>
-
-    <!-- VIDEO -->
-    <div class="row my-4">
-      <div class="col d-flex justify-content-center">
-        <img src="" class="p-1 bg-dark" alt="" id="video" />
-      </div>
-    </div>
-
-    <!-- JOYSTICK -->
-    <div class="row my-4">
-      <div class="col">
-        <div
-          class="d-flex justify-content-center"
-          style="width: 210px; height: 210px;"
-        >
-          <div id="joystick"></div>
+        <div>
+          <div class="alert alert-success">
+            <h4 class="alert-heading">JDB</h4>
+            <ul>
+              <li>set speed and turning using slider</li>
+              <li>use joystick to move rovey</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- INFO -->
-    <div class="row my-4">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-        <div class="alert alert-success">
-          <h4 class="alert-heading">JDB</h4>
-          <ul>
-            <li>set speed and turning using slider</li>
-            <li>use joystick to move rovey</li>
-          </ul>
+      <!-- JOYSTICK -->
+      <div class="row my-4 joystick-container">
+        <div class="col">
+          <div
+            class="d-flex justify-content-center"
+            style="width: 210px; height: 210px;"
+          >
+            <div id="joystick"></div>
+          </div>
         </div>
       </div>
-      <div class="col-md-2"></div>
+      <!-- Sliders -->
+      <div>
+        <div class="justify-content-center my-4">
+          <span class="font-weight-bold purple-text">Speed</span>
+          <span class="font-weight-bold update-label" id="speed-label"
+            >100 RPM</span
+          >
+          <input
+            type="range"
+            min="15"
+            max="100"
+            class="custom-range robot-slider"
+            id="robot-speed"
+            data-slider-id="robot-speed-data"
+            step="10"
+          />
+        </div>
+        <div>
+          <label for="robot-turn">
+            <strong>Turn Rate</strong>
+          </label>
+          <input
+            type="range"
+            min="15"
+            max="100"
+            class="custom-range robot-slider"
+            id="robot-turn"
+            step="10"
+          />
+        </div>
+      </div>
+      <div>
+        <img class="logo" src="./Images/final logo.png" />
+      </div>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script
