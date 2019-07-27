@@ -6,19 +6,27 @@ body {
   padding: 5px;
   background: #555555;
   height: 100vh;
+  max-height: 100vh;
 }
 .contents {
   background: #f1f1f1;
   max-height: 100vh;
+  max-width: 400px;
   padding: 10px;
 }
 .joystick-container {
   margin: 0px;
-  height: 30vh;
+  height: 25vh;
 }
 .logo {
-  height: 20vh;
+  height: 15vh;
 }
+.logo-holder {
+  background-image: url("./Images/final logo.png");
+  height: 100%;
+  width: auto;
+}
+
 .update-label {
   position: absolute;
   right: 20px;
@@ -36,4 +44,8 @@ body {
 
 .joystick-icon {
   width: 30px;
+}
+
+.slider-holder {
+  position: relative;
 }

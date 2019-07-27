@@ -79,9 +79,9 @@ function createJoystickX() {
     // joystck configuration
     var options = {
       zone: joystickContainer,
-      position: { left: 50 + "%", top: 140 + "px" },
+      position: { left: 50 + "%", top: 120 + "px" },
       mode: "static",
-      size: 150,
+      size: 130,
       color: "#000000",
       restJoystick: true,
       lockY: true
@@ -120,9 +120,9 @@ function createJoystickY() {
     // joystck configuration
     var options = {
       zone: joystickContainer,
-      position: { left: 50 + "%", top: 140 + "px" },
+      position: { left: 50 + "%", top: 120 + "px" },
       mode: "static",
-      size: 150,
+      size: 130,
       color: "#000000",
       restJoystick: true,
       lockX: true
