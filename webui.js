@@ -8,8 +8,8 @@ var teleop;
 var ros;
 var listener;
 
-var RPM;
-var turn;
+var RPM = 0.0;
+var turn = 0.0;
 var turn_range = 1;
 var speed_range = 1;
 function moveAction() {
